@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_helpdesk_ticket_timesheet_form" model="ir.ui.view">
+        <field name="name">view.helpdesk_ticket.timesheet.form</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='other_info']" position="after">
+                <field name="use_timesheet" attrs="{'invisible': True}"/>
+                <page string="Timesheet" name="timesheet" attrs="{'invisible': [('use_timesheet', '=', False)]}">
+                    <field name="total_hours"/>
+                    <field name="timesheet_ids" context="{'default_company_id': company_id}">
+                        <tree editable="bottom">
+                            <field name="date"/>
+                            <field name="employee_id"/>
+                            <field name="company_id" attrs="{'invisible': True}"/>
+                            <field name="account_id"/>
+                            <field name="name"/>
+                            <field name="unit_amount"/>
+                            <field name="employee_cost"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
